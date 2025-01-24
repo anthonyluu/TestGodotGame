@@ -1,11 +1,13 @@
 extends RigidBody2D
 
+class_name Mob
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var mob_types = $AnimatedSprite2D.sprite_frames.get_animation_names()
 	$AnimatedSprite2D.play(mob_types[randi() % mob_types.size()])
-	pass # Replace with function body.
+	contact_monitor = true
+	max_contacts_reported = 10
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -15,3 +17,9 @@ func _process(delta: float) -> void:
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 	queue_free()
+
+
+func _on_body_entered(body: Node) -> void:
+	if body is Bullet:
+		hide()
+		queue_free()

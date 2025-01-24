@@ -19,6 +19,7 @@ func game_over() -> void:
 	$ScoreTimer.stop()
 	$MobTimer.stop()
 	$HUD.show_game_over()
+	$Player.game_over()
 
 
 func new_game() -> void:
@@ -42,25 +43,24 @@ func _on_start_timer_timeout() -> void:
 
 
 func _on_mob_timer_timeout() -> void:
-	pass
-	#var mob = mob_scene.instantiate()
-	#
-	## choose random location on path
-	#var mob_spawn_location = $MobPath/MobSpawnLocation
-	#mob_spawn_location.progress_ratio = randf()
-	#
-	## set mob's direction perpendicular to that path direction
-	#var direction = mob_spawn_location.rotation + PI/2
-	#
-	## set mob's position to a random location
-	#mob.position = mob_spawn_location.position
-	#
-	## add some randomness to direction
-	#direction += randf_range(-PI/4, PI/4)
-	#mob.rotation = direction
-	#
-	## choose velocity for mob
-	#var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
-	#mob.linear_velocity = velocity.rotated(direction)
-	#
-	#add_child(mob)
+	var mob = mob_scene.instantiate()
+	
+	# choose random location on path
+	var mob_spawn_location = $MobPath/MobSpawnLocation
+	mob_spawn_location.progress_ratio = randf()
+	
+	# set mob's direction perpendicular to that path direction
+	var direction = mob_spawn_location.rotation + PI/2
+	
+	# set mob's position to a random location
+	mob.position = mob_spawn_location.position
+	
+	# add some randomness to direction
+	direction += randf_range(-PI/4, PI/4)
+	mob.rotation = direction
+	
+	# choose velocity for mob
+	var velocity = Vector2(randf_range(150.0, 250.0), 0.0)
+	mob.linear_velocity = velocity.rotated(direction)
+	
+	add_child(mob)
