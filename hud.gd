@@ -22,7 +22,7 @@ func show_game_over():
 	await $MessageTimer.timeout
 	$Message.show()
 	
-	$Message.text = "Dodge the Creeps!"
+	$Message.text = "Bullet Hell Game!"
 	await get_tree().create_timer(1.0).timeout
 	$StartButton.show()
 	

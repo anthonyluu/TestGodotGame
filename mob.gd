@@ -1,6 +1,7 @@
 extends RigidBody2D
 
 class_name Mob
+signal mobHit
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -21,5 +22,6 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 func _on_body_entered(body: Node) -> void:
 	if body is Bullet:
+		mobHit.emit()
 		hide()
 		queue_free()

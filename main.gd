@@ -30,11 +30,16 @@ func new_game() -> void:
 	$StartTimer.start()
 	$HUD.update_score(score)
 	$HUD.show_message("Get Ready")
+	
 
-
-func _on_score_timer_timeout() -> void:
+func incrementScore() -> void:
 	score += 1
 	$HUD.update_score(score)
+
+func _on_score_timer_timeout() -> void:
+	pass
+	#score += 1
+	#$HUD.update_score(score)
 
 
 func _on_start_timer_timeout() -> void:
@@ -64,3 +69,4 @@ func _on_mob_timer_timeout() -> void:
 	mob.linear_velocity = velocity.rotated(direction)
 	
 	add_child(mob)
+	mob.connect("mobHit", incrementScore)
